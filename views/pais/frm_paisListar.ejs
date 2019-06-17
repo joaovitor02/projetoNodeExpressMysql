@@ -1,0 +1,144 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+
+    <link rel='stylesheet' href='/estilos/estilos.css'>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/css/materialize.min.css">
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+
+    <script src="https://code.jquery.com/jquery-3.4.1.min.js"
+        integrity="sha256-CSXorXvZcTkaix6Yvo6HppcZGetbYMGWSFlBw8HfCJo=" crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@8"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/js/materialize.min.js"></script>
+    <script src='/js/main.js'></script>
+
+    <title> <%= title %> </title>
+
+    <script>
+        function editar(pais) {
+                console.log(pais);
+                $('#modal1 #pais_nome').val( pais.pais_nome);
+
+                $('#modal1 #pais_capital').val( pais.pais_capital);
+
+                $('#modal1 #pais_hemisferio').val(pais.pais_hemisferio);
+                $('#modal1 #pais_hemisferio').formSelect();
+
+                $('#modal1 #pais_codigo').val(pais.pais_codigo);
+
+                M.updateTextFields(); 
+                $('#modal1').modal('open');
+        }
+    </script>
+
+</head>
+
+<body>
+
+
+    <header>
+        <nav>
+            <div class="nav-wrapper indigo accent-2">
+                    <ul id="nav-mobile" class="left hide-on-med-and-down">
+                    <li><a href="/">Home</a></li>
+                    <li><a href="/filme/listarFilmes">Filmes</a></li>
+                    <li><a href="/ator/listarAtor">Ator</a></li>
+                    <li class="active"><a href="/pais/listarPaises">Pais</a></li>
+                </ul>
+            </div>
+        </nav>
+    </header>
+
+    <main>
+        <div class='row'>
+            <div class="col s10 offset-s1">
+                <div class="card">
+                    <div class="card-content">
+                        <table class='highlight responsive-table'>
+                            <thead>
+                                <tr>
+                                    <th>Código</th>
+                                    <th>Nome</th>
+                                    <th>Capital</th>
+                                    <th>Hemisfério</th>
+                                    <th>Opções</th>
+
+                                </tr>
+                            </thead>
+
+                            <tbody>
+                                <% for (i=0; i < paises.length; i++){ %>
+                                <tr>
+                                    <td> <%= paises[i].pais_codigo %> </td>
+                                    <td> <%= paises[i].pais_nome %> </td>
+                                    <td> <%= paises[i].pais_capital %> </td>
+                                    <td> <%= paises[i].pais_hemisferio %> </td>
+                                    <td>
+                                        <a class="waves-effect waves-light btn-small blue"><i
+                                                class="material-icons" onclick="editar(<%= JSON.stringify(paises[i]) %>)">create</i></a>
+                                        <a class="waves-effect waves-light btn-small red"><i class="material-icons" onclick="excluirPais(<%= paises[i].pais_codigo %>)">clear</i></a>
+                                    </td>
+                                </tr>
+                                <% } %>
+                            </tbody>
+                        </table>
+
+                        <div class="fixed-action-btn direction-top" style="bottom: 60px; right: 24px;">
+                            <a class="btn-floating btn-large red modal-trigger pulse" href="#modal1"><i
+                                    class="material-icons">add</i></a>
+                        </div>
+
+                        <div id="modal1" class="modal">
+                            <div class="modal-content">
+                                <form id="cadastrarPais" method="POST" action="pais/criar" class="">
+                                    <div class="input-field">
+                                        <input id="pais_nome" type="text" class="validate" name="pais_nome">
+                                        <label for="pais_nome">Nome</label>
+                                    </div>
+
+                                    <div class="input-field">
+                                        <input id="pais_capital" type="text" class="validate"
+                                            name="pais_capital">
+                                        <label for="pais_capital">Capital</label>
+                                    </div>
+
+                                    <div class="input-field">
+                                        <select id="pais_hemisferio" name="pais_hemisferio">
+                                            <option value="" disabled selected>Hemisfério</option>
+                                            <option value="Norte">Norte</option>
+                                            <option value="Sul">Sul</option>
+                                        </select>
+                                    </div>
+
+                                    <div class="modal-footer">
+                                        <button type="submit" class="btn-large tooltipped green darken-2"
+                                            data-position="left" data-tooltip="Cadastrar"><i
+                                                class="material-icons">check</i></button>
+                                    </div>
+
+                                <input type="hidden" id="pais_codigo" />
+
+                                </form>
+                            </div>
+                        </div>
+
+                    </div>
+                </div>
+            </div>
+        </div>
+
+    </main>
+    <footer class="page-footer indigo accent-2">
+        <div class="container">
+            Desenvolvido por João em 2019 &copy;| Programação Script
+        </div>
+    </footer>
+</body>
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/js/materialize.min.js"></script>
+
+</html>

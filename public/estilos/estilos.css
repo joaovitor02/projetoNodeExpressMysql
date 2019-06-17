@@ -1,0 +1,23 @@
+
+#imagemCentral{
+    margin: 80px 0px 0px 240px;
+    width: 250px;
+    height: 150px;
+    opacity: 0.1;
+    filter: alpha(opacity = 50);
+}
+
+#imagemCentral:hover{
+    opacity: 1.0;
+    filter: alpha(opacity = 100);
+}
+
+body{
+    display: flex;
+    min-height: 100vh;
+    flex-direction: column;
+}
+
+main{
+    flex: 1 0 auto;
+}
