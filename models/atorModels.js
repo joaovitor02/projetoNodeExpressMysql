@@ -23,7 +23,7 @@ function excluirAtor(atr_codigo, callback){
 }
 
 function criarAtor(dados, callback){
-    const data = moment(dados.atr_nascimento).format('YYYY-MM-DD HH:MM:SS');
+    const data = moment(dados.atr_nascimento, "DD/MM/YYYY").toDate();
     dados.atr_nascimento = data;
     client.query('insert into Ator set ?', dados, callback);
 }

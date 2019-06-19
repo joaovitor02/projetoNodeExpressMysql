@@ -1,4 +1,9 @@
 $(document).ready(function () {
+
+        $('.parallax').parallax();
+    
+
+
     $('.tooltipped').tooltip();
     $('.modal').modal();
     $('select').formSelect({
@@ -227,3 +232,4 @@ function excluirPais(pais_codigo) {
         }
     });
 }
+

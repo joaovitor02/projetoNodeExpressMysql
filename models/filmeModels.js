@@ -13,7 +13,7 @@ function listarFilmes(callback){
 }
 
 function criarFilme(dados, callback){
-    const data = moment(dados.fil_dtProducao, 'YYYY-MM-DD').toDate();
+    const data = moment(dados.fil_dtProducao, 'DD/MM/YYYY').toDate();
     dados.fil_dtProducao = data;
     client.query('insert into Filme set ?', dados, callback);
 }
